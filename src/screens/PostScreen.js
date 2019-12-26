@@ -9,6 +9,10 @@ export const PostScreen = ({}) => {
     );
 };
 
+PostScreen.navigationOptions = {
+    headerTitle: 'Запись блога',
+};
+
 const styles = StyleSheet.create({
     canter: {
         flex: 1,
