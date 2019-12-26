@@ -1,15 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Button,
+    FlatList,
+} from 'react-native';
+import { DATA } from '../mocks';
+import { Post } from '../components/Post';
 
 export const MainScreen = ({ navigation }) => {
     return (
-        <View style={styles.canter}>
-            <Text>MainScreen</Text>
-            <Button
-                title='Пост'
-                // переход на другой скрин через навигацию
-                onPress={() => navigation.navigate('Post')}
-            ></Button>
+        <View style ={styles.wrapper}>
+            <FlatList
+                data={DATA}
+                keyExtractor={post => post.id.toString()}
+                renderItem={({item}) => <Post post={item}/>}
+            />
         </View>
     );
 };
@@ -20,9 +27,7 @@ MainScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
-    canter: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    wrapper: {
+        padding: 10,
     }
 });
