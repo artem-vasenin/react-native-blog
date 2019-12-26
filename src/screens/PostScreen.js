@@ -11,6 +11,8 @@ export const PostScreen = ({}) => {
 
 PostScreen.navigationOptions = {
     headerTitle: 'Запись блога',
+    /** можно кастомизирова стилизацию навбара страницы */
+    // headerTintColor: 'red',
 };
 
 const styles = StyleSheet.create({
