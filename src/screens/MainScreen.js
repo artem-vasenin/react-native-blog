@@ -3,9 +3,17 @@ import {
   View,
   StyleSheet,
   FlatList,
+  Text,
 } from 'react-native';
+import {
+  HeaderButtons,
+  Item,
+  HeaderButton
+} from 'react-navigation-header-buttons';
+
 import { DATA } from '../mocks';
 import { Post } from '../components/Post';
+import { AppHeadIcon } from '../components/AppHeadIcon';
 
 export const MainScreen = ({ navigation }) => {
   const OpenPost = post => navigation.navigate('Post', { post });
@@ -28,6 +36,15 @@ export const MainScreen = ({ navigation }) => {
 MainScreen.navigationOptions = {
     /** задаем заголовок в нав.панели */
     headerTitle: 'Блог',
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
+        <Item
+          title='Take photo'
+          iconName='ios-camera'
+          onPress={() => console.log('add post')}
+        />
+      </HeaderButtons>
+    ),
 };
 
 const styles = StyleSheet.create({
