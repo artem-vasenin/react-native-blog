@@ -1,18 +1,51 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
+import {
+  HeaderButtons,
+  Item
+} from 'react-navigation-header-buttons';
 
-export const BookedScreen = ({}) => {
-    return (
-        <View style={styles.canter}>
-            <Text>BookedScreen</Text>
-        </View>
-    );
+import { DATA } from '../mocks';
+import { Post } from '../components/Post';
+import { AppHeadIcon } from '../components/AppHeadIcon';
+
+export const BookedScreen = ({ navigation }) => {
+  const OpenPost = post => navigation.navigate('Post', { post });
+
+  return (
+    <View style ={styles.wrapper}>
+      <FlatList
+        data={DATA.filter(i => i.booked)}
+        keyExtractor={post => post.id.toString()}
+        renderItem={({item}) => 
+          <Post
+            post={item}
+            onOpen={OpenPost}
+          />}
+      />
+    </View>
+  );
+};
+
+BookedScreen.navigationOptions = {
+    headerTitle: 'Избранное',
+    headerLeft: (
+      <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
+        <Item
+          title='Menu'
+          iconName='ios-menu'
+          onPress={() => console.log('menu')}
+        />
+      </HeaderButtons>
+    ),
 };
 
 const styles = StyleSheet.create({
-    canter: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    wrapper: {
+        padding: 10,
     }
 });
