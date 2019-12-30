@@ -14,12 +14,7 @@ import { AboutScreen } from '../screens/AboutScreen';
 import { CreateScreen } from '../screens/CreateScreen';
 import { THEME } from '../theme';
 
-const PostNavigator = createStackNavigator({
-    Main: MainScreen,
-    Post: { screen: PostScreen }
-}, {
-    /** можно указать осн экран, если не указан то первый */
-    initialRouteName: 'Main',
+const NavOptions = {
     defaultNavigationOptions: {
         /** задаем параметры для панели навигации */
         headerStyle: {
@@ -31,23 +26,17 @@ const PostNavigator = createStackNavigator({
             THEME.COLOR_MAIN :
             '#fff',
     }
-});
+};
+
+const PostNavigator = createStackNavigator({
+    Main: MainScreen,
+    Post: { screen: PostScreen }
+}, NavOptions);
 
 const BookedNavigator = createStackNavigator({
     Booked: BookedScreen,
     Post: PostScreen,
-}, {
-    defaultNavigationOptions: {
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ?
-                THEME.COLOR_MAIN :
-                '#fff'
-        },
-        headerTintColor: Platform.OS !== 'android' ?
-            THEME.COLOR_MAIN :
-            '#fff',
-    }
-});
+}, NavOptions);
 
 const BottomTabsConfig = {
     Post: {
@@ -87,10 +76,18 @@ const BottomNavigator = Platform.OS === 'android'
         tabBarOptions: { activeTintColor: THEME.COLOR_MAIN }
     });
 
-const MainMenu = createDrawerNavigator({
+const AboutNavigator = createStackNavigator({
+    About: AboutScreen,
+}, NavOptions);
+
+const CreateNavigator = createStackNavigator({
+    Create: CreateScreen,
+}, NavOptions);
+
+const MainNavigator = createDrawerNavigator({
     PostTabs: { screen: BottomNavigator },
-    About: { screen: AboutScreen },
-    Create: { screen: CreateScreen },
+    About: { screen: AboutNavigator },
+    Create: { screen: CreateNavigator },
 });
 
-export const AppNavigation = createAppContainer(MainMenu);
+export const AppNavigation = createAppContainer(MainNavigator);

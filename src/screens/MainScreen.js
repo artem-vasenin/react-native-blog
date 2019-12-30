@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   FlatList,
-  Text,
 } from 'react-native';
 import {
   HeaderButtons,
@@ -48,7 +47,7 @@ MainScreen.navigationOptions = ({ navigation }) => ({
         <Item
           title='Take photo'
           iconName='ios-camera'
-          onPress={() => console.log('add post')}
+          onPress={() => navigation.push('Create')}
         />
       </HeaderButtons>
     ),
