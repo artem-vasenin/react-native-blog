@@ -4,4 +4,4 @@
 4 - устанавливаем навигацию https://reactnavigation.org/docs/en/getting-started.html через expo install
 5 - создаем каталог navigation с файлом роутинга.
 
----------- 065 --- 1:35 -----------
+---------- 071 --- 0:00 -----------
