@@ -32,15 +32,14 @@ export const MainScreen = ({ navigation }) => {
   );
 };
 
-MainScreen.navigationOptions = {
-    /** задаем заголовок в нав.панели */
+MainScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Блог',
     headerLeft: (
       <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
         <Item
           title='Menu'
           iconName='ios-menu'
-          onPress={() => console.log('menu')}
+          onPress={() => navigation.toggleDrawer()}
         />
       </HeaderButtons>
     ),
@@ -53,7 +52,7 @@ MainScreen.navigationOptions = {
         />
       </HeaderButtons>
     ),
-};
+});
 
 const styles = StyleSheet.create({
     wrapper: {
