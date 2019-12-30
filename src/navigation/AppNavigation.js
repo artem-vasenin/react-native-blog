@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import { MainScreen } from '../screens/MainScreen';
 import { PostScreen } from '../screens/PostScreen';
@@ -45,7 +46,7 @@ const BookedNavigator = createStackNavigator({
     }
 });
 
-const BottomNavigator = createBottomTabNavigator({
+const BottomTabsConfig = {
     Post: {
         screen: PostNavigator,
         navigationOptions: {
@@ -55,7 +56,8 @@ const BottomNavigator = createBottomTabNavigator({
                     size={24}
                     color={info.tintColor}
                 />
-            )
+            ),
+            tabBarLabel: 'Посты',
         }
     },
     Booked: {
@@ -67,11 +69,19 @@ const BottomNavigator = createBottomTabNavigator({
                     size={24}
                     color={info.tintColor}
                 />
-            )
+            ),
+            tabBarLabel: 'Избранное',
         }
     },
-}, {
-    tabBarOptions: { activeTintColor: THEME.COLOR_MAIN }
-});
+};
+
+const BottomNavigator = Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(BottomTabsConfig, {
+        activeTintColor: 'white',
+        barStyle: { backgroundColor: THEME.COLOR_MAIN }
+    })
+    : createBottomTabNavigator(BottomTabsConfig, {
+        tabBarOptions: { activeTintColor: THEME.COLOR_MAIN }
+    });
 
 export const AppNavigation = createAppContainer(BottomNavigator);
