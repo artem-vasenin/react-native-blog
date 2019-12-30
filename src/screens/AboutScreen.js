@@ -9,7 +9,8 @@ import { AppHeadIcon } from '../components/AppHeadIcon';
 export const AboutScreen = ({}) => {
     return (
         <View style={styles.canter}>
-            <Text>AboutScreen</Text>
+            <Text>Тестовое приложение для изучения React Native</Text>
+            <Text>Версия приложения v.1.0.0</Text>
         </View>
     );
 };

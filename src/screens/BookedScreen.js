@@ -31,18 +31,18 @@ export const BookedScreen = ({ navigation }) => {
   );
 };
 
-BookedScreen.navigationOptions = {
+BookedScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Избранное',
     headerLeft: (
       <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
         <Item
           title='Menu'
           iconName='ios-menu'
-          onPress={() => console.log('menu')}
+          onPress={() => navigation.toggleDrawer()}
         />
       </HeaderButtons>
     ),
-};
+});
 
 const styles = StyleSheet.create({
     wrapper: {
