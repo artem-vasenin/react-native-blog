@@ -7,8 +7,7 @@ import {
 } from 'react-native';
 import {
   HeaderButtons,
-  Item,
-  HeaderButton
+  Item
 } from 'react-navigation-header-buttons';
 
 import { DATA } from '../mocks';
@@ -36,6 +35,15 @@ export const MainScreen = ({ navigation }) => {
 MainScreen.navigationOptions = {
     /** задаем заголовок в нав.панели */
     headerTitle: 'Блог',
+    headerLeft: (
+      <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
+        <Item
+          title='Menu'
+          iconName='ios-menu'
+          onPress={() => console.log('menu')}
+        />
+      </HeaderButtons>
+    ),
     headerRight: (
       <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
         <Item
