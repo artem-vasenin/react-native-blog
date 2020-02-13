@@ -7,31 +7,34 @@ import {
 import { AppHeadIcon } from '../components/AppHeadIcon';
 
 export const AboutScreen = ({}) => {
-    return (
-        <View style={styles.canter}>
-            <Text>Тестовое приложение для изучения React Native</Text>
-            <Text>Версия приложения v.1.0.0</Text>
-        </View>
-    );
+  return (
+    <View style={styles.canter}>
+      <Text>Тестовое приложение для изучения React Native</Text>
+      <Text>Версия приложения <Text style={styles.boldText}>v.1.0.0</Text></Text>
+    </View>
+  );
 };
 
 AboutScreen.navigationOptions = ({ navigation }) => ({
-    headerTitle: 'О приложении',
-    headerLeft: (
-      <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
-        <Item
-          title='Menu'
-          iconName='ios-menu'
-          onPress={() => navigation.toggleDrawer()}
-        />
-      </HeaderButtons>
-    ),
+  headerTitle: 'О приложении',
+  headerLeft: (
+    <HeaderButtons HeaderButtonComponent={AppHeadIcon}>
+      <Item
+        title='Menu'
+        iconName='ios-menu'
+        onPress={() => navigation.toggleDrawer()}
+      />
+    </HeaderButtons>
+  ),
 });
 
 const styles = StyleSheet.create({
-    canter: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
+  canter: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
 });
