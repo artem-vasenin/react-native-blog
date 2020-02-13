@@ -16,7 +16,7 @@ import {
 
 import { THEME } from '../theme';
 import { AppHeadIcon } from '../components/AppHeadIcon';
-import { toggleBooked } from '../store/actions/post';
+import { toggleBooked, removePost } from '../store/actions/post';
 
 export const PostScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -54,7 +54,10 @@ export const PostScreen = ({ navigation }) => {
                 {
                     text: 'Нож в печень - никто не вечен',
                     style: 'destructive',
-                    onPress: () => console.log('OK Pressed'),
+                    onPress: () => {
+                        navigation.navigate('Main');
+                        dispatch(removePost(post.id));
+                    },
                 },
             ],
             {cancelable: false},
