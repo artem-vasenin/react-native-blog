@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -8,6 +8,7 @@ import {
     ScrollView,
     Alert,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   HeaderButtons,
   Item
@@ -15,9 +16,31 @@ import {
 
 import { THEME } from '../theme';
 import { AppHeadIcon } from '../components/AppHeadIcon';
+import { toggleBooked } from '../store/actions/post';
 
 export const PostScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
     const post = navigation.getParam('post');
+    const booked = useSelector(
+        state => state.post.bookedPosts
+        .some(i => i.id === post.id)
+    );
+
+    useEffect(() => {
+        navigation.setParams({booked});
+    }, [booked]);
+
+    // Используя ф-цию обертку useCallback мы указываем зависимости
+    // и передаем ее саму как зависимость в useEffect
+    // если так не сделать то при изменении компонента будет цикл
+    // а сейчас она дернется единожды. Нихх-я не понял но интересно
+    const toggleHandler = useCallback(() => {
+        dispatch(toggleBooked(post.id));
+    }, [dispatch, post]);
+
+    useEffect(() => {
+        navigation.setParams({toggleHandler});
+    }, [toggleHandler]);
 
     const RemoveHandler = () => {
         Alert.alert(
@@ -55,6 +78,7 @@ export const PostScreen = ({ navigation }) => {
 
 PostScreen.navigationOptions = ({ navigation }) => {
     const post = navigation.getParam('post');
+    const toggleHandler = navigation.getParam('toggleHandler');
     const iconName = post.booked ? 'ios-star' : 'ios-star-outline';
 
     return {
@@ -64,7 +88,7 @@ PostScreen.navigationOptions = ({ navigation }) => {
             <Item
             title='Take photo'
             iconName={iconName}
-            onPress={() => console.log('add post')}
+            onPress={toggleHandler}
             />
         </HeaderButtons>
         ),
